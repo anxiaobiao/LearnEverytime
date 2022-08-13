@@ -1,0 +1,328 @@
+make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.82.90
+# Built for i686-pc-mingw32
+# Copyright (C) 1988-2012 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+ 
+Makefile:8: C:/Program: No such file or directory
+Makefile:8: Files/PostgreSQL/11/lib/pgxs/src/makefiles/pgxs.mk: No such file or directory
+
+
+# Make data base, printed on Wed Aug 03 09:29:57 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(patsubst %\,%,$(dir $<)))
+# automatic
+?F = $(notdir $?)
+# default
+.SHELLFLAGS := -c
+# makefile
+MAKEFLAGS = Rrp
+# automatic
+?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
+# automatic
+@D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
+# environment
+HOMEDRIVE = C:
+# automatic
+@F = $(notdir $@)
+# automatic
+^D = $(patsubst %/,%,$(patsubst %\,%,$(dir $^)))
+# makefile
+CURDIR := c:/Users/�о�Ժ/Desktop/pg
+# default
+SHELL := sh.exe
+# environment
+WINDIR = C:\Windows
+# environment
+VSCODE_NLS_CONFIG = {"locale":"zh-cn","availableLanguages":{"*":"zh-cn"},"_languagePackId":"1d735750dbb1b9066c7513078396ba0f.zh-cn","_translationsConfigFile":"C:\\Users\\�о�Ժ\\AppData\\Roaming\\Code\\clp\\1d735750dbb1b9066c7513078396ba0f.zh-cn\\tcf.json","_cacheRoot":"C:\\Users\\�о�Ժ\\AppData\\Roaming\\Code\\clp\\1d735750dbb1b9066c7513078396ba0f.zh-cn","_resolvedLanguagePackCoreLocation":"C:\\Users\\�о�Ժ\\AppData\\Roaming\\Code\\clp\\1d735750dbb1b9066c7513078396ba0f.zh-cn\\3b889b090b5ad5793f524b5d1d39fda662b96a2a","_corruptedFile":"C:\\Users\\�о�Ժ\\AppData\\Roaming\\Code\\clp\\1d735750dbb1b9066c7513078396ba0f.zh-cn\\corrupted.info","_languagePackSupport":true}
+# environment
+ONEDRIVE = C:\Users\�о�Ժ\OneDrive
+# environment
+GDAL_DATA = C:\Program Files\PostgreSQL\11\gdal-data
+# environment
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# environment
+FPS_BRO 
+WSER_USER_PROFILE_STRING = Default
+# environment
+TMP = C:\apps\AppData\Local\Temp
+# environment
+PROGRAMW6432 = C:\Program Files
+# environment
+PROGRAMDATA = C:\ProgramData
+# environment
+VSCODE_CWD = D:\applicate\Microsoft VS Code
+# environment
+PATH = C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;D:\applicate\nodejs\;D:\applicate\Git\cmd;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\vcpkg;D:\applicate\Cmake\bin;C:\vcpkg;D:\applicate\MongoDB\bin;C:\Program Files\Common Files\Autodesk Shared\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;D:\OSG\OSG3.6.5\build\bin;D:\OSG\3rdParty\x64\bin;D:\applicate\matlab2017b\runtime\win64;D:\applicate\matlab2017b\bin;C:\Program Files\Pandoc\;D:\applicate\Graphviz\bin;C:\Program Files (x86)\Yarn\bin\;D:\applicate\mingw64\bin;C:\MinGW\bin;C:\Program Files\PostgreSQL\11\bin;C:\Program Files\PostgreSQL\11\lib;D:\applicate\Graphviz\bin;D:\applicate\Microsoft VS Code\bin;C:\Users\�о�Ժ\AppData\Local\Yarn\bin
+# environment
+COMMONPROGRAMW6432 = C:\Program Files\Common Files
+# environment
+ZES_ENABLE_SYSMAN = 1
+# environment
+PROCESSOR_ARCHITECTURE = x86
+# environment
+USERPROFILE = C:\Users\�о�Ժ
+# environment
+ALLUSERSPROFILE = C:\ProgramData
+# environment
+AGSDESKTOPJAVA = D:\Program Files (x86)\ArcGIS\Desktop10.7\
+# environment
+NUMBER_OF_PROCESSORS = 20
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver
+# makefile (from 'Makefile', line 2)
+MODULES = codewithkey
+# makefile (from 'Makefile', line 4)
+DATA = codewithkey--1.0.sql
+# automatic
+%F = $(notdir $%)
+# environment
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_22892_EVMTZFJAAHJMHVDE
+# environment
+POSTGIS_GDAL_ENABLED_DRIVERS = GTiff PNG JPEG GIF XYZ DTED USGSDEM AAIGrid
+# environment
+COMPUTERNAME = �ں�
+# environment
+PROGRAMFILES = C:\Program Files (x86)
+# makefile (from 'Makefile', line 3)
+EXTENSION = codewithkey
+# environment
+DRIVERDATA = C:\Windows\System32\Drivers\DriverData
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+USERNAME = �о�Ժ
+# environment
+PUBLIC = C:\Users\Public
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+VSCODE_CODE_CACHE_PATH = C:\Users\�о�Ժ\AppData\Roaming\Code\CachedData\3b889b090b5ad5793f524b5d1d39fda662b96a2a
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+COMMONPROGRAMFILES = C:\Program Files (x86)\Common Files
+# environment
+LOGONSERVER = \\�ں�
+# makefile (from 'Makefile', line 7)
+PGXS := C:/Program Files/PostgreSQL/11/lib/pgxs/src/makefiles/pgxs.mk
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# environment
+USERDOMAIN = �ں�
+# environment
+MAKELEVEL := 0
+# environment
+CC_CENTER = C:\Program Files\Bentley\ContextCapture Center\
+# environment
+POSTGIS_ENABLE_OUTDB_RASTERS = 1
+# default
+MAKECMDGOALS := all
+# default
+MAKE_VERSION := 3.82.90
+# makefile
+.DEFAULT_GOAL := 
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+OSG_FILE_PATH = D:\OSG\OSG_build\OpenSceneGraph-Data
+# environment
+PROGRAMFILES(X86) = C:\Program Files (x86)
+# automatic
+%D = $(patsubst %/,%,$(patsubst %\,%,$(dir $%)))
+# environment
+PROJ_LIB = C:\Program Files\PostgreSQL\11\share\contrib\postgis-3.0\proj
+# environment
+LOCALAPPDATA = C:\Users\�о�Ժ\AppData\Local
+# environment
+PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+# default
+MAKE_COMMAND := make.exe
+# environment
+PROCESSOR_ARCHITEW6432 = AMD64
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# environment
+PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 154 Stepping 3, GenuineIntel
+# environment
+OS = Windows_NT
+# environment
+VSCODE_IPC_HOOK = \\.\pipe\725d0d0427d44d04e5de487cbf1a701e-1.69.2-main-sock
+# environment
+HOMEPATH = \Users\�о�Ժ
+# environment
+COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
+# environment
+PROMPT = $P$G
+# environment
+MFLAGS = -Rrp
+# automatic
+*D = $(patsubst %/,%,$(patsubst %\,%,$(dir $*)))
+# environment
+SYSTEMROOT = C:\Windows
+# automatic
++D = $(patsubst %/,%,$(patsubst %\,%,$(dir $+)))
+# automatic
++F = $(notdir $+)
+# environment
+APPDATA = C:\Users\�о�Ժ\AppData\Roaming
+# environment
+TEMP = C:\apps\AppData\Local\Temp
+# environment
+COMSPEC = C:\Windows\system32\cmd.exe
+# default
+MAKEFILES := 
+# makefile (from 'Makefile', line 6)
+PG_CONFIG = pg_config
+# environment
+ADSK_3DSMAX_X64_2020 = D:\applicate\3Dmax\3ds Max 2020\
+# automatic
+<F = $(notdir $<)
+# environment
+LC_ALL = C
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# environment
+SYSTEMDRIVE = C:
+# environment
+SESSIONNAME = Console
+# environment
+PROCESSOR_REVISION = 9a03
+# environment
+PYCHARM = D:\applicate\PyCharm 2020.1\bin;
+# default
+.INCLUDE_DIRS = C:/MinGW/include
+# default
+.RECIPEPREFIX := 
+# environment
+LANG = C
+# environment
+PROCESSOR_LEVEL = 6
+# environment
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
+# environment
+CC_CENTER_JOBQUEUE = C:\Users\�о�Ժ\Documents\Bentley\ContextCapture Center\Jobs
+# environment
+VSCODE_PID = 22892
+# environment
+USERDOMAIN_ROAMINGPROFILE = �ں�
+# variable set hash-table stats:
+# Load=102/1024=10%, Rehash=0, Collisions=11/124=9%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# D:\applicate\MongoDB\bin (key D:/applicate/MongoDB/bin, mtime 1653874979): 27 files, no impossibilities.
+# C:\Program Files\Common Files\Autodesk Shared\ (key C:/Program Files/Common Files/Autodesk Shared/, mtime 1653893482): 55 files, no impossibilities.
+# C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR (key C:/Program Files/NVIDIA Corporation/NVIDIA NvDLISR, mtime 1646108853): 5 files, no impossibilities.
+# D:\applicate\Cmake\bin (key D:/applicate/Cmake/bin, mtime 1652930060): 7 files, no impossibilities.
+# C:\Program Files (x86)\Yarn\bin\ (key C:/Program Files (x86)/Yarn/bin/, mtime 1659176923): 7 files, no impossibilities.
+# D:\applicate\matlab2017b\runtime\win64 (key D:/applicate/matlab2017b/runtime/win64, mtime 1654655246): 7 files, no impossibilities.
+# C:\Windows\System32\WindowsPowerShell\v1.0\ (key C:/Windows/System32/WindowsPowerShell/v1.0/, mtime 1622915612): 31 files, no impossibilities.
+# . (key c:/Users/�о�Ժ/Desktop/pg, mtime 1659490196): 9 files, no impossibilities.
+# D:\applicate\nodejs\ (key D:/applicate/nodejs/, mtime 1652667664): 13 files, no impossibilities.
+# C:\Windows\System32\OpenSSH\: could not be stat'd.
+# D:\applicate\Microsoft VS Code\bin (key D:/applicate/Microsoft VS Code/bin, mtime 1658815001): 4 files, no impossibilities.
+# C:\MinGW\bin (key C:/MinGW/bin, mtime 1659336748): 141 files, no impossibilities.
+# C:\Users\�о�Ժ\AppData\Local\Yarn\bin (key C:/Users/�о�Ժ/AppData/Local/Yarn/bin, mtime 1659177000): 2 files, no impossibilities.
+# C:\Program Files\Pandoc\ (key C:/Program Files/Pandoc/, mtime 1656919535): 6 files, no impossibilities.
+# C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common (key C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common, mtime 1646108820): 10 files, no impossibilities.
+# D:\applicate\Graphviz\bin (key D:/applicate/Graphviz/bin, mtime 1658650335): 116 files, no impossibilities.
+# C:\Program Files\PostgreSQL\11\lib (key C:/Program Files/PostgreSQL/11/lib, mtime 1656920948): 128 files, no impossibilities.
+# C:\Windows (key C:/Windows, mtime 1658990732): 112 files, no impossibilities.
+# D:\OSG\3rdParty\x64\bin (key D:/OSG/3rdParty/x64/bin, mtime 1491600847): 234 files, no impossibilities.
+# D:\applicate\mingw64\bin (key D:/applicate/mingw64/bin, mtime 1659320611): 58 files, no impossibilities.
+# C:\Program Files\Microsoft SQL Server\130\Tools\Binn\ (key C:/Program Files/Microsoft SQL Server/130/Tools/Binn/, mtime 1652928920): 4 files, no impossibilities.
+# C:\Windows\System32\Wbem (key C:/Windows/System32/Wbem, mtime 1652841423): 155 files, no impossibilities.
+# D:\OSG\OSG3.6.5\build\bin (key D:/OSG/OSG3.6.5/build/bin, mtime 1654477449): 743 files, no im 
+possibilities.
+# D:\applicate\matlab2017b\bin (key D:/applicate/matlab2017b/bin, mtime 1654655253): 21 files, no impossibilities.
+# D:\applicate\Git\cmd (key D:/applicate/Git/cmd, mtime 1652927939): 8 files, no impossibilities.
+# C:\Windows\system32 (key C:/Windows/system32, mtime 1659233040): 3096 files, no impossibilities.
+# C:\Program Files\Microsoft SQL Server\120\Tools\Binn\ (key C:/Program Files/Microsoft SQL Server/120/Tools/Binn/, mtime 1653893473): 4 files, no impossibilities.
+# C:\Program Files (x86)\VMware\VMware Workstation\bin\ (key C:/Program Files (x86)/VMware/VMware Workstation/bin/, mtime 1655892224): 4 files, no impossibilities.
+# C:\vcpkg: could not be stat'd.
+# C:\Program Files\PostgreSQL\11\bin (key C:/Program Files/PostgreSQL/11/bin, mtime 1656920948): 110 files, no impossibilities.
+
+# 5117 files, no impossibilities in 30 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+# Not a target:
+all:
+#  Command line target.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Files/PostgreSQL/11/lib/pgxs/src/makefiles/pgxs.mk:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has not been done.
+#  Last modified 2022-08-02 16:37:08
+#  File has not been updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+C:/Program:
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=6/1024=1%, Rehash=0, Collisions=0/18=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 10 (9) / strings = 5021 / storage = 80574 B / avg = 16 B
+# current buf: size = 8174 B / used = 7075 B / count = 469 / avg = 15 B
+# other used: total = 72400 B / count = 4552 / avg = 15 B
+# other free: total = 67 B / max = 14 B / min = 3 B / avg = 7 B
+
+# strcache performance: lookups = 5157 / hit rate = 2%
+# hash-table stats:
+# Load=5021/8192=61%, Rehash=0, Collisions=3072/5157=60%
+# Finished Make data base on Wed Aug 03 09:29:57 2022
+
+ 
+make.exe: *** No rule to make target 'Files/PostgreSQL/11/lib/pgxs/src/makefiles/pgxs.mk'.  Stop.
+

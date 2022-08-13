@@ -1,0 +1,1 @@
+import osgeo._osr

@@ -1,0 +1,12 @@
+make.exe --dry-run --always-make --keep-going --print-directory
+make.exe: Entering directory 'c:/Users/�о�Ժ/Desktop/pg'
+make.exe: Leaving directory 'c:/Users/�о�Ժ/Desktop/pg'
+ 
+Makefile:8: C:/Program: No such file or directory
+Makefile:8: Files/PostgreSQL/11/lib/pgxs/src/makefiles/pgxs.mk: No such file or directory
+make.exe: *** No rule to make target 'Files/PostgreSQL/11/lib/pgxs/src/makefiles/pgxs.mk'.
+make.exe: *** No rule to make target 'C:/Program'.
+make.exe: Failed to remake makefile 'Files/PostgreSQL/11/lib/pgxs/src/makefiles/pgxs.mk'.
+make.exe: Failed to remake makefile 'C:/Program'.
+make.exe: *** No targets specified and no makefile found.  Stop.
+

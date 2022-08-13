@@ -1,0 +1,6 @@
+#cat codewithkey.control
+comment = 'This is an encode or decode tool'
+default_version = '1.0'
+module_pathname = '$libdir/codewithkey'
+relocatable = true
+

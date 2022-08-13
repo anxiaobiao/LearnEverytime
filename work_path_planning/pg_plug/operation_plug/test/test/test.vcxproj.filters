@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="include\drive">
+      <UniqueIdentifier>{7586f565-1f43-4daa-b937-7d0134756419}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\algorithm">
+      <UniqueIdentifier>{1d41e496-7da5-4ebe-b658-fac4464f0ca1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="operation_drive.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="operation_plus.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\drive\operation_drive.h">
+      <Filter>include\drive</Filter>
+    </ClInclude>
+    <ClInclude Include="include\algorithm\Operation_plus.hpp">
+      <Filter>include\algorithm</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

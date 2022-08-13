@@ -1,0 +1,11 @@
+-- cat  codewithkey--1.0.sql 
+CREATE OR REPLACE FUNCTION en(text,text)
+  RETURNS text  AS
+'MODULE_PATHNAME','encode'
+LANGUAGE c IMMUTABLE STRICT;
+
+CREATE OR REPLACE FUNCTION de(text,text)
+  RETURNS text  AS
+'MODULE_PATHNAME','decode'
+LANGUAGE c IMMUTABLE STRICT;
+

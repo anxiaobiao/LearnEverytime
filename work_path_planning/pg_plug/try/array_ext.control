@@ -1,0 +1,4 @@
+# array_ext extension
+comment = 'extend array'
+default_version = '0.0.1'
+relocatable = true

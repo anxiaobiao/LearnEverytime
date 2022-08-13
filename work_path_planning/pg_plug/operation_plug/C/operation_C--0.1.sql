@@ -1,0 +1,4 @@
+CREATE OR REPLACE FUNCTION operation(int4, int4, char)
+  RETURNS int4  AS
+'MODULE_PATHNAME','operation'
+LANGUAGE c IMMUTABLE STRICT;

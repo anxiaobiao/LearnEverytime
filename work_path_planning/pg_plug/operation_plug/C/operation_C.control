@@ -1,0 +1,5 @@
+#cat operation_c.control
+comment = 'This is tool of for adding and subtracting'
+default_version = '0.1'
+module_pathname = '$libdir/operation_C'
+relocatable = true

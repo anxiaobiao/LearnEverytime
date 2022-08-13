@@ -468,13 +468,13 @@ class PSO_Planning():
         
 if __name__ == '__main__':
     
-    # pso = PSO_Planning(draw_flag = True)
-    # pso.PSO()
-    # print("PSO:", pso.global_best)
+    pso = PSO_Planning(draw_flag = True)
+    pso.PSO()
+    print("PSO:", pso.global_best)
     
-    oacrr_pso = PSO_Planning(draw_flag = True)
-    oacrr_pso.OACRR_PSO()
-    print("OACRR-PSO:", oacrr_pso.global_best)
+    # oacrr_pso = PSO_Planning(draw_flag = True)
+    # oacrr_pso.OACRR_PSO()
+    # print("OACRR-PSO:", oacrr_pso.global_best)
     
     
     
