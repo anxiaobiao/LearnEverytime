@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <math.h>
 #include <iostream>
+#include<fstream>
 
 using namespace std::placeholders;
 
@@ -70,7 +71,7 @@ void AStar::Generator::setCoordinatesMap(CoordinateList coordinatesmap_)
 		auto temp = std::pair<float, float>(it->x, it->y);
 		coordinatemap[temp] = it->z;
 	}
-	std::cout << "设置字典成功！" << std::endl;
+	//std::cout << "设置字典成功！" << std::endl;
 
 }
 
@@ -91,7 +92,7 @@ void AStar::Generator::addCollision(CoordinateList coordinates_)
 		walls.push_back(*begin);
 		++begin;
 	}
-	std::cout << "设置障碍成功" << std::endl;
+	//std::cout << "设置障碍成功" << std::endl;
 }
 
 void AStar::Generator::removeCollision(Vec2i coordinates_)
@@ -123,12 +124,12 @@ AStar::CoordinateList AStar::Generator::findPath(Vec2i source_, Vec2i target_, i
 	//建立最小堆
 	auto cmp = [](Node* x, Node* y) { return x->getScore() > y->getScore(); };
 	std::make_heap(openSet.begin(), openSet.end(), cmp);
-	int i12 = 1;
+	int i12 = 0;
     while (!openSet.empty()) {
   //      auto current_it = openSet.begin();
   //      current = *current_it;
-		i12 = i12 + 1;
-		std::cout << i12 << std::endl;
+		//i12 = i12 + 1;
+		//std::cout << i12 << std::endl;
 
   //      for (auto it = openSet.begin(); it != openSet.end(); it++) {
   //          auto node = *it;
@@ -138,7 +139,7 @@ AStar::CoordinateList AStar::Generator::findPath(Vec2i source_, Vec2i target_, i
   //          }
   //      }
 
-		auto current = openSet.front();
+		current = openSet.front();
 
         if (current->coordinates == target_) {
             break;
@@ -153,6 +154,10 @@ AStar::CoordinateList AStar::Generator::findPath(Vec2i source_, Vec2i target_, i
 			Vec2i newCoordinates(current->coordinates + direction[i]);	// 引入数据坐标
 			auto temp = std::pair<float, float>(newCoordinates.x, newCoordinates.y);
 			newCoordinates.z = coordinatemap[temp];
+			//std::cout << coordinatemap[temp] << std::endl;
+			//std::cout << "current->coordinates:" <<current->coordinates.x << ", " << current->coordinates.y << ", " << current->coordinates.z << std::endl;
+			//std::cout << "newCoordinates:" << newCoordinates.x << ", " << newCoordinates.y << ", " << newCoordinates.z << std::endl;
+
 
             if (detectCollision(newCoordinates) || findNodeOnList(closedSet, newCoordinates)) {
                 continue;
@@ -178,9 +183,18 @@ AStar::CoordinateList AStar::Generator::findPath(Vec2i source_, Vec2i target_, i
     }
 
     CoordinateList path;
-    while (current != nullptr) {
-        path.push_back(current->coordinates);
-        current = current->parent;
+	Node *backtrack;
+	if (findNodeOnList(closedSet, target_) != nullptr) {
+		backtrack = current;
+	}
+	else {
+		backtrack = findNodeRecentList(closedSet, target_);
+	}
+	//std::cout << 'q' << std::endl;
+	//while (current != nullptr)
+    while (backtrack != nullptr) {
+        path.push_back(backtrack->coordinates);
+		backtrack = backtrack->parent;
     }
 
     releaseNodes(openSet);
@@ -214,6 +228,20 @@ AStar::Node* AStar::Generator::findNodeOnList(NodeSet& nodes_, Vec2i coordinates
         }
     }
     return nullptr;
+}
+// 寻找最近节点
+AStar::Node* AStar::Generator::findNodeRecentList(NodeSet& nodes_, Vec2i coordinates_)
+{
+	AStar::Heuristic heurustic;
+	Node* ans = nodes_[0];
+	float dis = heurustic.euclidean(ans->coordinates, coordinates_);
+	for (auto node : nodes_) {
+		if (heurustic.euclidean(node->coordinates, coordinates_) < dis) {
+			ans = node;
+			dis = heurustic.euclidean(node->coordinates, coordinates_);
+		}
+	}
+	return ans;
 }
 
 void AStar::Generator::releaseNodes(NodeSet& nodes_)
@@ -263,4 +291,62 @@ AStar::uint AStar::Heuristic::octagonal(Vec2i source_, Vec2i target_)
 {
     auto delta = std::move(getDelta(source_, target_));
     return 10 * (delta.x + delta.y) + (-6) * std::min(delta.x, delta.y);
+}
+
+AStar::CoordinateList AStar::Preprocess::read_data(std::string str_Path)
+{
+	std::ifstream infile;
+	infile.open(str_Path);
+	AStar::CoordinateList data;
+	if (!infile)
+	{
+		std::cout << "error" << std::endl;
+		system("pause");
+		return data;
+	}
+	std::string str;
+	double t1, t2, t3, t4, t5;
+	AStar::Vec2i Pt;
+	while (infile >> t1 >> t2 >> t3)	//按空格读取，遇到空白符结束
+	{
+		Pt.x = t1;
+		Pt.y = t2;
+		Pt.z = t3;
+		data.push_back(Pt);
+		//std::cout << Pt.x << " " << Pt.y << " " << Pt.z << std::endl;
+	}
+	//std::cout << "读取文件结束！" << std::endl;
+	return data;
+}
+
+void AStar::Preprocess::save_data(std::string str_Path, AStar::CoordinateList data)
+{
+	std::ofstream outFile;
+	//打开文件
+	outFile.open(str_Path);
+	auto begin = data.begin();
+	auto end = data.end();
+	while (begin != end)
+	{
+		//float arr[3] = { begin->x, begin->y ,begin->z };
+		outFile << begin->x << ' ' << begin->y << ' ' << begin->z << std::endl;
+		++begin;
+	}
+	//std::cout << "写入成功" << std::endl;
+	//关闭文件
+	outFile.close();
+}
+
+AStar::Vec2i AStar::Preprocess::match(Vec2i point, CoordinateList data)
+{
+	AStar::Heuristic heurustic;
+	Vec2i ans = data[0];
+	float dis = heurustic.euclidean(ans, point);
+	for (auto it = data.begin(); it != data.end(); ++it) {
+		if (heurustic.euclidean(*it, point) < dis) {
+			ans = *it;
+			dis = heurustic.euclidean(*it, point);
+		}
+	}
+	return ans;
 }

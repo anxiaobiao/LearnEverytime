@@ -3,6 +3,15 @@
     Following tool is licensed under the terms and conditions of the ISC license.
     For more information visit https://opensource.org/licenses/ISC.
 */
+
+//#ifndef DLL_EXPORT
+//#define DLL_EXPORT __declspec(dllexport)
+//#else
+//#define DLL_EXPORT __declspec(dllimport)
+//#endif // !1
+
+
+
 #ifndef __ASTAR_HPP_8F637DB91972F6C878D41D63F7E7214F__
 #define __ASTAR_HPP_8F637DB91972F6C878D41D63F7E7214F__
 
@@ -11,6 +20,7 @@
 #include <functional>
 #include <set>
 #include <map>
+#include<string>
 
 namespace AStar
 {
@@ -43,7 +53,8 @@ namespace AStar
     class Generator
     {
 		bool detectCollision(Vec2i coordinates_);	//检测碰撞
-        Node* findNodeOnList(NodeSet& nodes_, Vec2i coordinates_);
+		Node* findNodeOnList(NodeSet& nodes_, Vec2i coordinates_);
+		Node* findNodeRecentList(NodeSet& nodes_, Vec2i coordinates_);
         void releaseNodes(NodeSet& nodes_);
 
     public:
@@ -78,6 +89,15 @@ namespace AStar
         static uint euclidean(Vec2i source_, Vec2i target_);
         static uint octagonal(Vec2i source_, Vec2i target_);
     };
+
+	// 预处理及处理文件操作
+	class Preprocess
+	{
+	public:
+		CoordinateList read_data(std::string str_Path);
+		void save_data(std::string str_Path, CoordinateList data);
+		Vec2i match(Vec2i point, CoordinateList data);
+	};
 }
 
 #endif // __ASTAR_HPP_8F637DB91972F6C878D41D63F7E7214F__
