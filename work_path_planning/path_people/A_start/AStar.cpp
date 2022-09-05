@@ -28,9 +28,9 @@ AStar::uint AStar::Node::getScore() const
     return G + H;
 }
 
-AStar::Generator::Generator(float n_, float m_)	// n±íÊ¾xÖá£¬m±íÊ¾yÖá£¬¼´£¨n, m£©
+AStar::Generator::Generator(float n_, float m_)	// nè¡¨ç¤ºxè½´ï¼Œmè¡¨ç¤ºyè½´ï¼Œå³ï¼ˆn, mï¼‰
 {
-    setDiagonalMovement(false);	//³õÊÔÎªËÄÏò£¬¿ÉÒÔ¸ÄÎª°ËÏò
+    setDiagonalMovement(false);	//åˆè¯•ä¸ºå››å‘ï¼Œå¯ä»¥æ”¹ä¸ºå…«å‘
     setHeuristic(&Heuristic::manhattan);
     direction = {
         { 0, m_ }, { n_, 0 }, { 0, -m_ }, { -n_, 0 },
@@ -50,11 +50,11 @@ void AStar::Generator::setDiagonalMovement(bool enable_)
 
 void AStar::Generator::setHeuristic(HeuristicFunction heuristic_)
 {
-    heuristic = std::bind(heuristic_, _1, _2);	// _1, _2±íÊ¾Õ¼Î»·û£¬½«±»´«ÈëµÄ²ÎÊı´úÌæ
+    heuristic = std::bind(heuristic_, _1, _2);	// _1, _2è¡¨ç¤ºå ä½ç¬¦ï¼Œå°†è¢«ä¼ å…¥çš„å‚æ•°ä»£æ›¿
 }
 
 /*
-×Ô¶¨Òåº¯Êı£¬½«Êı¾İÌí¼Óµ½ÀàÖĞ,Êı¾İ·ÅÔÚcoordinatemapÖĞ¡£Ê¹ÓÃ×ÖµäµÄ·½Ê½²éÑ¯zÖá×ø±ê
+è‡ªå®šä¹‰å‡½æ•°ï¼Œå°†æ•°æ®æ·»åŠ åˆ°ç±»ä¸­,æ•°æ®æ”¾åœ¨coordinatemapä¸­ã€‚ä½¿ç”¨å­—å…¸çš„æ–¹å¼æŸ¥è¯¢zè½´åæ ‡
 */
 void AStar::Generator::setCoordinatesMap(CoordinateList coordinatesmap_)
 {
@@ -71,7 +71,7 @@ void AStar::Generator::setCoordinatesMap(CoordinateList coordinatesmap_)
 		auto temp = std::pair<float, float>(it->x, it->y);
 		coordinatemap[temp] = it->z;
 	}
-	//std::cout << "ÉèÖÃ×Öµä³É¹¦£¡" << std::endl;
+	//std::cout << "è®¾ç½®å­—å…¸æˆåŠŸï¼" << std::endl;
 
 }
 
@@ -92,7 +92,7 @@ void AStar::Generator::addCollision(CoordinateList coordinates_)
 		walls.push_back(*begin);
 		++begin;
 	}
-	//std::cout << "ÉèÖÃÕÏ°­³É¹¦" << std::endl;
+	//std::cout << "è®¾ç½®éšœç¢æˆåŠŸ" << std::endl;
 }
 
 void AStar::Generator::removeCollision(Vec2i coordinates_)
@@ -112,8 +112,7 @@ AStar::CoordinateList AStar::Generator::findPath(Vec2i source_, Vec2i target_, i
 {
 	//std::cout << angle << std::endl;
 	if (std::find(walls.begin(), walls.end(), source_) != walls.end() || std::find(walls.begin(), walls.end(), target_) != walls.end()) {
-		std::cout << "Æğµã»òÖÕµãÔÚÕÏ°­ÖĞ£¡£¡£¡" << std::endl;
-		
+		std::cout << "èµ·ç‚¹æˆ–ç»ˆç‚¹åœ¨éšœç¢ä¸­ï¼ï¼ï¼" << std::endl;
 	}
 
     Node *current = nullptr;
@@ -121,7 +120,7 @@ AStar::CoordinateList AStar::Generator::findPath(Vec2i source_, Vec2i target_, i
     openSet.reserve(100);
     closedSet.reserve(100);
     openSet.push_back(new Node(source_));
-	//½¨Á¢×îĞ¡¶Ñ
+	//å»ºç«‹æœ€å°å †
 	auto cmp = [](Node* x, Node* y) { return x->getScore() > y->getScore(); };
 	std::make_heap(openSet.begin(), openSet.end(), cmp);
 	int i12 = 0;
@@ -151,7 +150,7 @@ AStar::CoordinateList AStar::Generator::findPath(Vec2i source_, Vec2i target_, i
 		openSet.pop_back();
 
         for (uint i = 0; i < directions; ++i) {
-			Vec2i newCoordinates(current->coordinates + direction[i]);	// ÒıÈëÊı¾İ×ø±ê
+			Vec2i newCoordinates(current->coordinates + direction[i]);	// å¼•å…¥æ•°æ®åæ ‡
 			auto temp = std::pair<float, float>(newCoordinates.x, newCoordinates.y);
 			newCoordinates.z = coordinatemap[temp];
 			//std::cout << coordinatemap[temp] << std::endl;
@@ -163,8 +162,8 @@ AStar::CoordinateList AStar::Generator::findPath(Vec2i source_, Vec2i target_, i
                 continue;
             }
 
-            //uint totalCost = current->G + ((i < 4) ? 10 : 14);	//ĞŞ¸Äcost
-			uint totalCost = current->G + cost(current->coordinates, newCoordinates, alpha, angle);	//Æğµã µ±Ç°µã ÏÂÒ»¸ö¿ÉÄÜµã
+            //uint totalCost = current->G + ((i < 4) ? 10 : 14);	//ä¿®æ”¹cost
+			uint totalCost = current->G + cost(current->coordinates, newCoordinates, alpha, angle);	//èµ·ç‚¹ å½“å‰ç‚¹ ä¸‹ä¸€ä¸ªå¯èƒ½ç‚¹
 
             Node *successor = findNodeOnList(openSet, newCoordinates);
             if (successor == nullptr) {
@@ -189,6 +188,8 @@ AStar::CoordinateList AStar::Generator::findPath(Vec2i source_, Vec2i target_, i
 	}
 	else {
 		backtrack = findNodeRecentList(closedSet, target_);
+		//std::cout << "æ²¡æœ‰è·¯å¾„ï¼Œåœæ­¢ç¨‹åº" << std::endl;
+		//exit(0);   // ç¨‹åºéæ­£å¸¸é€€å‡º
 	}
 	//std::cout << 'q' << std::endl;
 	//while (current != nullptr)
@@ -204,7 +205,7 @@ AStar::CoordinateList AStar::Generator::findPath(Vec2i source_, Vec2i target_, i
 }
 
 /*
-¼ÆËãÌí¼ÓÆÂ¶ÈµÄ´ú¼Ûº¯Êı
+è®¡ç®—æ·»åŠ å¡åº¦çš„ä»£ä»·å‡½æ•°
 */
 AStar::uint AStar::Generator::cost(Vec2i begin_, Vec2i end_, int alpha, float angle)
 {
@@ -229,7 +230,7 @@ AStar::Node* AStar::Generator::findNodeOnList(NodeSet& nodes_, Vec2i coordinates
     }
     return nullptr;
 }
-// Ñ°ÕÒ×î½ü½Úµã
+// å¯»æ‰¾æœ€è¿‘èŠ‚ç‚¹
 AStar::Node* AStar::Generator::findNodeRecentList(NodeSet& nodes_, Vec2i coordinates_)
 {
 	AStar::Heuristic heurustic;
@@ -255,7 +256,7 @@ void AStar::Generator::releaseNodes(NodeSet& nodes_)
 /*
 	coordinates_.x < 0 || coordinates_.x >= worldSize.x ||
     coordinates_.y < 0 || coordinates_.y >= worldSize.y ||
-    ÅĞ¶Ï±ß½çÊ±½öÊ¹ÓÃÕÏ°­ÅĞ¶Ï£¬¼´½«±ß½çÒ²ÉèÖÃÎªÕÏ°­
+    åˆ¤æ–­è¾¹ç•Œæ—¶ä»…ä½¿ç”¨éšœç¢åˆ¤æ–­ï¼Œå³å°†è¾¹ç•Œä¹Ÿè®¾ç½®ä¸ºéšœç¢
 */
 bool AStar::Generator::detectCollision(Vec2i coordinates_)
 {
@@ -283,7 +284,7 @@ AStar::uint AStar::Heuristic::manhattan(Vec2i source_, Vec2i target_)
 
 AStar::uint AStar::Heuristic::euclidean(Vec2i source_, Vec2i target_)
 {
-    auto delta = std::move(getDelta(source_, target_));	// move×÷ÓÃ£¬Ç¿ÖÆ×ª»¯
+    auto delta = std::move(getDelta(source_, target_));	// moveä½œç”¨ï¼Œå¼ºåˆ¶è½¬åŒ–
     return static_cast<uint>(10 * sqrt(pow(delta.x, 2) + pow(delta.y, 2)));
 }
 
@@ -307,7 +308,7 @@ AStar::CoordinateList AStar::Preprocess::read_data(std::string str_Path)
 	std::string str;
 	double t1, t2, t3, t4, t5;
 	AStar::Vec2i Pt;
-	while (infile >> t1 >> t2 >> t3)	//°´¿Õ¸ñ¶ÁÈ¡£¬Óöµ½¿Õ°×·û½áÊø
+	while (infile >> t1 >> t2 >> t3)	//æŒ‰ç©ºæ ¼è¯»å–ï¼Œé‡åˆ°ç©ºç™½ç¬¦ç»“æŸ
 	{
 		Pt.x = t1;
 		Pt.y = t2;
@@ -315,14 +316,14 @@ AStar::CoordinateList AStar::Preprocess::read_data(std::string str_Path)
 		data.push_back(Pt);
 		//std::cout << Pt.x << " " << Pt.y << " " << Pt.z << std::endl;
 	}
-	//std::cout << "¶ÁÈ¡ÎÄ¼ş½áÊø£¡" << std::endl;
+	//std::cout << "è¯»å–æ–‡ä»¶ç»“æŸï¼" << std::endl;
 	return data;
 }
 
 void AStar::Preprocess::save_data(std::string str_Path, AStar::CoordinateList data)
 {
 	std::ofstream outFile;
-	//´ò¿ªÎÄ¼ş
+	//æ‰“å¼€æ–‡ä»¶
 	outFile.open(str_Path);
 	auto begin = data.begin();
 	auto end = data.end();
@@ -332,8 +333,8 @@ void AStar::Preprocess::save_data(std::string str_Path, AStar::CoordinateList da
 		outFile << begin->x << ' ' << begin->y << ' ' << begin->z << std::endl;
 		++begin;
 	}
-	//std::cout << "Ğ´Èë³É¹¦" << std::endl;
-	//¹Ø±ÕÎÄ¼ş
+	//std::cout << "å†™å…¥æˆåŠŸ" << std::endl;
+	//å…³é—­æ–‡ä»¶
 	outFile.close();
 }
 

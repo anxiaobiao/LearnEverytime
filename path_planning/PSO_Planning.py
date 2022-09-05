@@ -219,12 +219,12 @@ class PSO_Planning():
 
     def distance(self, pro_piont, ind, ever_obstacle, i):
         
-        # 利用海伦公式求面积
+        # 利用求面积
         a = geo.cosine_law(pro_piont[1], ind[i+self.indsize], abs(pro_piont[0] - ind[i]))   # 圆心所对边的长度
         b = geo.cosine_law(ever_obstacle[1], ind[i+self.indsize], abs(ever_obstacle[0] - ind[i]))
         c = geo.cosine_law(pro_piont[1], ever_obstacle[1], abs(pro_piont[0] - ever_obstacle[0]))
         p = (a + b + c) / 2
-        S = math.sqrt(p * (p - a) * (p - b) * (p - c))
+        S = math.sqrt(abs(p * (p - a) * (p - b) * (p - c)))
         
         return (2 * S / a) < ever_obstacle[2]
                 
@@ -447,8 +447,112 @@ class PSO_Planning():
                     
         self.objective_func()
             
+    # OACRR-PSAO算法
+    def OACRR_PSAO(self):
+        
+        # 获得黄金分割位置
+        def get_pg(ind, j):
             
-    
+            if j == 0:
+                return 0.382 * ind[j]
+            elif j < self.indsize:
+                return 0.382 * ind[j] + 0.618 * ind[j-1]
+            elif j == self.indsize:
+                return 0.382 * ind[j] + 0.618 * self.attack_platform[1]
+            else:
+                return 0.382 * ind[j] + 0.309 * ind[j-1]
+            
+        # 初始化参数
+        c_1, c_2, c_3 = 2, 2, 2
+                
+        for k in range(self.iterations):
+            
+            if self.draw_flag:
+                self.draw()
+            print("OACRR-PSAO第{}次迭代,分数{}".format(k, self.best_score))
+            
+            w = 0.9 - 0.5 / self.iterations * k
+            r_1, r_2, r_3 = np.random.rand(), np.random.rand(), np.random.rand()
+            
+            self.objective_func()
+            for i in range(self.popsize):
+                remain_len = self.attack_len
+                pro_angle = self.attack_platform[0]
+                pol_len = self.attack_platform[1]
+                for j in range(self.indsize):
+                    
+                    # 记录上一代的位置和速度
+                    angle = self.ind_all[i][j]
+                    pol = self.ind_all[i][j + self.indsize]
+                    
+                    # 更新极角位置
+                    self.velocity[i][j] = w * self.velocity[i][j] + \
+                                c_1 * r_1 * (self.curr_best[i][j] - self.ind_all[i][j]) + \
+                                c_2 * r_2 * (self.global_best[j] - self.ind_all[i][j])
+                    self.ind_all[i][j] = self.ind_all[i][j] + self.velocity[i][j]
+                                        
+                    # 更新极径位置
+                    self.velocity[i][j + self.indsize] = w * self.velocity[i][j + self.indsize] + c_1 * r_1 * \
+                        (self.curr_best[i][j + self.indsize] - self.ind_all[i][j + self.indsize]) + c_2 * r_2 * \
+                            (self.global_best[j + self.indsize] - self.ind_all[i][j + self.indsize])
+                    self.ind_all[i][j + self.indsize] = self.ind_all[i][j + self.indsize] + self.velocity[i][j + self.indsize]
+                    
+                    num = 0
+                    # 如果当前节点位置大于区域簇，执行下面的语句
+                    while geo.polar_coordinates(remain_len, pol_len, pro_angle, self.ind_all[i][j]) < self.ind_all[i][j + self.indsize]:
+                        
+                        pg_angle = get_pg(self.ind_all[i], j)
+                        pg_pol = get_pg(self.ind_all[i], j + self.indsize)
+                        
+                        # 更新极角
+                        self.velocity[i][j] = c_3 * r_3 * (pg_angle - angle)
+                        self.ind_all[i][j] = angle + self.velocity[i][j]
+                        
+                        # 更新极径
+                        self.velocity[i][j + self.indsize] = c_3 * r_3 * (pg_pol - pol)
+                        self.ind_all[i][j + self.indsize] = pol + self.velocity[i][j + self.indsize]
+                        
+                        if num > 10:
+                            self.ind_all[i][j + self.indsize] %= geo.polar_coordinates(remain_len, pol_len, pro_angle, self.ind_all[i][j])
+                            break
+                        num += 1
+                    
+                    pro_angle += self.ind_all[i][j]
+                    remain_len -= geo.cosine_law(pol_len, self.ind_all[i][j+self.indsize], self.ind_all[i][j])
+                    pol_len = self.ind_all[i][j+self.indsize]
+            # 减价SA扰动和接收判决
+            if k < self.iterations-1:
+                self.SA(k)
+                    
+        self.objective_func()
+        
+    # 模拟退化算法
+    def SA(self, k):
+        
+        # 对于每一个种群
+        for i in range(self.popsize):
+            # 对于每一个种群的粒子
+            temp = [0] * self.indsize * 2
+            for j in range(self.indsize):
+                
+                # 对极角与极径进行轻微扰动
+                temp[j] = self.ind_all[i][j] + \
+                                ((np.random.random() - 0.5)/10) * self.velocity[i][j]
+                temp[j + self.indsize] = self.ind_all[i][j + self.indsize] + \
+                                ((np.random.random() - 0.5)/5) *self.velocity[i][j + self.indsize]
+            
+            # 对每一个种群的新解和旧解求解
+            new = self.performance(temp) - self.penalty_func(temp)
+            old = self.performance(self.ind_all[i]) - self.penalty_func(self.ind_all[i])
+            
+            # 判断是否接收新解
+            P = math.exp(-((new - old) / (self.iterations - k)))
+            if (new - old) <= 0 or np.random.random() < P:
+                self.ind_all[i] = temp
+            else:
+                continue
+                
+                
     # 画图
     def draw(self):
     
@@ -468,13 +572,17 @@ class PSO_Planning():
         
 if __name__ == '__main__':
     
-    pso = PSO_Planning(draw_flag = True)
-    pso.PSO()
-    print("PSO:", pso.global_best)
+    # pso = PSO_Planning(draw_flag = True)
+    # pso.PSO()
+    # print("PSO:", pso.global_best)
     
     # oacrr_pso = PSO_Planning(draw_flag = True)
     # oacrr_pso.OACRR_PSO()
     # print("OACRR-PSO:", oacrr_pso.global_best)
+    
+    oacrr_psao = PSO_Planning(draw_flag = True)
+    oacrr_psao.OACRR_PSAO()
+    print("OACRR-PSAO:", oacrr_psao.global_best)
     
     
     

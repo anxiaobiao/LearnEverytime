@@ -3,38 +3,25 @@
     Following tool is licensed under the terms and conditions of the ISC license.
     For more information visit https://opensource.org/licenses/ISC.
 */
-
-//#ifndef DLL_EXPORT
-//#define DLL_EXPORT __declspec(dllexport)
-//#else
-//#define DLL_EXPORT __declspec(dllimport)
-//#endif // !1
-
-
-
 #ifndef __ASTAR_HPP_8F637DB91972F6C878D41D63F7E7214F__
 #define __ASTAR_HPP_8F637DB91972F6C878D41D63F7E7214F__
 
-#include<queue>
 #include <vector>
 #include <functional>
 #include <set>
-#include <map>
-#include<string>
 
 namespace AStar
 {
-    struct Vec2i	//定义坐标和重载等号
+    struct Vec2i
     {
-		float x, y, z;	//从int改为float。原因：输入的数据为浮点型，所以后面的分数也要改为float
+        int x, y;
 
         bool operator == (const Vec2i& coordinates_);
     };
 
-	using uint = float;	// 所有结果不是int，是float。从unsigned int改为float
-    using HeuristicFunction = std::function<uint(Vec2i, Vec2i)>;	//函数包装器，通用多态
+    using uint = unsigned int;
+    using HeuristicFunction = std::function<uint(Vec2i, Vec2i)>;
     using CoordinateList = std::vector<Vec2i>;
-	using CoordinateMap = std::map<std::pair<float, float>, float>;
 
     struct Node
     {
@@ -43,44 +30,41 @@ namespace AStar
         Node *parent;
 
         Node(Vec2i coord_, Node *parent_ = nullptr);
-        uint getScore() const;
+        uint getScore();
     };
 
-    using NodeSet = std::vector<Node*>;
-	//using Nodeheapq = std::priority_queue<Node, std::vector<Node*>, cmp>;
-
+	using NodeSet = std::vector<Node*>;
+	using SolpeSet = std::vector<std::vector<uint>>;
 
     class Generator
     {
-		bool detectCollision(Vec2i coordinates_);	//检测碰撞
-		Node* findNodeOnList(NodeSet& nodes_, Vec2i coordinates_);
+        bool detectCollision(Vec2i coordinates_, Vec2i upper_left_, Vec2i lower_right_);
+        Node* findNodeOnList(NodeSet& nodes_, Vec2i coordinates_);
 		Node* findNodeRecentList(NodeSet& nodes_, Vec2i coordinates_);
         void releaseNodes(NodeSet& nodes_);
 
     public:
-        Generator(float n_, float m_);
+        Generator();
         void setWorldSize(Vec2i worldSize_);
-        void setDiagonalMovement(bool enable_);	//设置对角线移动
+        void setDiagonalMovement(bool enable_);
         void setHeuristic(HeuristicFunction heuristic_);
-
-		void setCoordinatesMap(CoordinateList coordinatesmap_);	//设置坐标字典
-		uint cost(Vec2i begin_, Vec2i end_, int alpha, float angle);		// 代价函数
-
-        CoordinateList findPath(Vec2i source_, Vec2i target_, int alpha, float angle);
-		//void addCollision(Vec2i coordinates_);//添加碰撞
-		void addCollision(CoordinateList coordinates_);//添加碰撞
+        CoordinateList findPath(Vec2i source_, Vec2i target_, Vec2i upper_left_, Vec2i lower_right_, int alpha);
+        void addCollision(CoordinateList coordinates_);
         void removeCollision(Vec2i coordinates_);
         void clearCollisions();
+
+		void setSolpe(SolpeSet solpe_);
 
     private:
         HeuristicFunction heuristic;
         CoordinateList direction, walls;
         Vec2i worldSize;
         uint directions;
-		CoordinateMap coordinatemap;
+		
+		SolpeSet solpe;
     };
 
-    class Heuristic	//距离方程
+    class Heuristic
     {
         static Vec2i getDelta(Vec2i source_, Vec2i target_);
 
@@ -90,14 +74,29 @@ namespace AStar
         static uint octagonal(Vec2i source_, Vec2i target_);
     };
 
-	// 预处理及处理文件操作
+	// Ԥ�����������ļ�����
 	class Preprocess
 	{
 	public:
-		CoordinateList read_data(std::string str_Path);
+		SolpeSet read_data(std::string str_Path);
 		void save_data(std::string str_Path, CoordinateList data);
-		Vec2i match(Vec2i point, CoordinateList data);
+		void save_data(std::string str_Path, std::vector<AStar::CoordinateList> data);
+		Vec2i match(std::vector<float> point, int side_x, int side_y);
 	};
+
+	// ��Է�����ʽ��this������
+	class GeneratorAdapter
+	{
+	private:
+		Generator *t;
+	public:
+		GeneratorAdapter(Generator *t_) :t(t_) {}
+		CoordinateList operator()(Vec2i source_, Vec2i target_, Vec2i upper_left_, Vec2i lower_right_, int alpha);
+	};
+
 }
+
+// ����ȫ�ֱ�����·��
+//extern std::vector<AStar::CoordinateList> all_path;
 
 #endif // __ASTAR_HPP_8F637DB91972F6C878D41D63F7E7214F__
