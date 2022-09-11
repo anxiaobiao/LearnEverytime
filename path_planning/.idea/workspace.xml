@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fdc31d36-b525-4429-872c-3b42efc2167c" name="默认更改列表" comment="" />
+    <list default="true" id="fdc31d36-b525-4429-872c-3b42efc2167c" name="默认更改列表" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GA_planning.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="26rlpqUZEXT42ZR6fvK0sAfT2No" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="添加" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -15,10 +32,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../EssayKiller_V2-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.UI">
     <configuration name="PSO_Planning" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="论文复现" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -34,7 +52,29 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PSO_Planning.py" />
       <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="UI" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="论文复现" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/UI.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -43,6 +83,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.UI" />
+        <item itemvalue="Python.PSO_Planning" />
         <item itemvalue="Python.PSO_Planning" />
       </list>
     </recent_temporary>
@@ -60,6 +102,8 @@
       <workItem from="1648189780011" duration="164000" />
       <workItem from="1648610332719" duration="38000" />
       <workItem from="1649415834999" duration="23000" />
+      <workItem from="1662780325015" duration="2677000" />
+      <workItem from="1662875812459" duration="925000" />
     </task>
     <servers />
   </component>
@@ -67,42 +111,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="163" key="FileChooserDialogImpl" timestamp="1649415855497">
+    <state width="775" height="415" key="XDebugger.FullValuePopup" timestamp="1662790008761">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1649415855497" />
-    <state width="1493" height="185" key="GridCell.Tab.0.bottom" timestamp="1648189948250">
-      <screen x="0" y="0" width="1536" height="816" />
-    </state>
-    <state width="1493" height="185" key="GridCell.Tab.0.bottom/0.0.1536.816@0.0.1536.816" timestamp="1648189948250" />
-    <state width="1493" height="185" key="GridCell.Tab.0.center" timestamp="1648189948250">
-      <screen x="0" y="0" width="1536" height="816" />
-    </state>
-    <state width="1493" height="185" key="GridCell.Tab.0.center/0.0.1536.816@0.0.1536.816" timestamp="1648189948250" />
-    <state width="1493" height="185" key="GridCell.Tab.0.left" timestamp="1648189948250">
-      <screen x="0" y="0" width="1536" height="816" />
-    </state>
-    <state width="1493" height="185" key="GridCell.Tab.0.left/0.0.1536.816@0.0.1536.816" timestamp="1648189948250" />
-    <state width="1493" height="185" key="GridCell.Tab.0.right" timestamp="1648189948250">
-      <screen x="0" y="0" width="1536" height="816" />
-    </state>
-    <state width="1493" height="185" key="GridCell.Tab.0.right/0.0.1536.816@0.0.1536.816" timestamp="1648189948250" />
-    <state width="1493" height="185" key="GridCell.Tab.1.bottom" timestamp="1648189948250">
-      <screen x="0" y="0" width="1536" height="816" />
-    </state>
-    <state width="1493" height="185" key="GridCell.Tab.1.bottom/0.0.1536.816@0.0.1536.816" timestamp="1648189948250" />
-    <state width="1493" height="185" key="GridCell.Tab.1.center" timestamp="1648189948250">
-      <screen x="0" y="0" width="1536" height="816" />
-    </state>
-    <state width="1493" height="185" key="GridCell.Tab.1.center/0.0.1536.816@0.0.1536.816" timestamp="1648189948250" />
-    <state width="1493" height="185" key="GridCell.Tab.1.left" timestamp="1648189948250">
-      <screen x="0" y="0" width="1536" height="816" />
-    </state>
-    <state width="1493" height="185" key="GridCell.Tab.1.left/0.0.1536.816@0.0.1536.816" timestamp="1648189948250" />
-    <state width="1493" height="185" key="GridCell.Tab.1.right" timestamp="1648189948250">
-      <screen x="0" y="0" width="1536" height="816" />
-    </state>
-    <state width="1493" height="185" key="GridCell.Tab.1.right/0.0.1536.816@0.0.1536.816" timestamp="1648189948250" />
+    <state width="775" height="415" key="XDebugger.FullValuePopup/0.0.1536.816@0.0.1536.816" timestamp="1662790008761" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
