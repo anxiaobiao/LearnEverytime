@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdc31d36-b525-4429-872c-3b42efc2167c" name="默认更改列表" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GA_planning.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,14 +34,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Python.UI">
+  <component name="RunManager" selected="Python.PSO_Planning">
     <configuration name="PSO_Planning" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="论文复现" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -83,6 +78,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.PSO_Planning" />
         <item itemvalue="Python.UI" />
         <item itemvalue="Python.PSO_Planning" />
         <item itemvalue="Python.PSO_Planning" />
@@ -104,6 +100,7 @@
       <workItem from="1649415834999" duration="23000" />
       <workItem from="1662780325015" duration="2677000" />
       <workItem from="1662875812459" duration="925000" />
+      <workItem from="1662879034520" duration="1248000" />
     </task>
     <servers />
   </component>
