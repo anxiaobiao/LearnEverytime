@@ -36,5 +36,5 @@ class Runthread(QtCore.QThread):
             pso = PSO(iterations = 200, draw_flag = False, indsize = self.indsize, attack_len = self.attack_len,\
                 max_angle = self.max_angle, min_length = self.min_length, obstacle = self.obstacle, \
                     attack_platform = self.attack_platform, launch_platform = self.launch_platform)
-            pso.OACRR_PSO()
+            pso.OACRR_PSO_GA()
             self._signal.emit(i, pso) 

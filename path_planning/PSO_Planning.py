@@ -10,6 +10,7 @@ import math
 import matplotlib.pyplot as plt
 import copy
 import time
+from random import randint
 
 import Geometric_gradient as geo
 import draw
@@ -90,6 +91,7 @@ class PSO_Planning():
         self.obstacle = obstacle  # [圆心极角，圆心极径，半径]，障碍为圆形
         
         self.best_score = self.performance(self.global_best) - self.penalty_func(self.global_best)
+        self.avg_score = sum([self.performance(i) - self.penalty_func(i) for i in self.curr_best]) / self.popsize
         
         self.draw_flag = draw_flag  # 调试时使用
         
@@ -299,6 +301,9 @@ class PSO_Planning():
             else:
                 best_value.append(old_value[i])
                 
+        # 计算全局的均值
+        self.avg_score = sum(best_value) / self.popsize
+        
         # 筛选出全局最优位置
         # best_value = self.performance(self.global_best) - self.penalty_func(self.global_best)
         for i in range(self.popsize):
@@ -551,7 +556,119 @@ class PSO_Planning():
                 self.ind_all[i] = temp
             else:
                 continue
+
+    # OACRR-PSO-GA算法
+    def OACRR_PSO_GA(self):
+        
+        # 获得黄金分割位置
+        def get_pg(ind, j):
+            
+            if j == 0:
+                return 0.382 * ind[j]
+            elif j < self.indsize:
+                return 0.382 * ind[j] + 0.618 * ind[j-1]
+            elif j == self.indsize:
+                return 0.382 * ind[j] + 0.618 * self.attack_platform[1]
+            else:
+                return 0.382 * ind[j] + 0.309 * ind[j-1]
+            
+        # 初始化参数
+        c_1, c_2, c_3 = 2, 2, 2
                 
+        for k in range(self.iterations):
+            
+            if self.draw_flag:
+                self.draw()
+            print("OACRR-PSO-GA第{}次迭代,分数{}".format(k, self.best_score))
+            
+            w = 0.9 - 0.5 / self.iterations * k
+            r_1, r_2, r_3 = np.random.rand(), np.random.rand(), np.random.rand()
+            
+            self.objective_func()
+            for i in range(self.popsize):
+                remain_len = self.attack_len
+                pro_angle = self.attack_platform[0]
+                pol_len = self.attack_platform[1]
+                for j in range(self.indsize):
+                    
+                    # 记录上一代的位置和速度
+                    angle = self.ind_all[i][j]
+                    pol = self.ind_all[i][j + self.indsize]
+                    
+                    # 更新极角位置
+                    self.velocity[i][j] = w * self.velocity[i][j] + \
+                                c_1 * r_1 * (self.curr_best[i][j] - self.ind_all[i][j]) + \
+                                c_2 * r_2 * (self.global_best[j] - self.ind_all[i][j])
+                    self.ind_all[i][j] = self.ind_all[i][j] + self.velocity[i][j]
+                                        
+                    # 更新极径位置
+                    self.velocity[i][j + self.indsize] = w * self.velocity[i][j + self.indsize] + c_1 * r_1 * \
+                        (self.curr_best[i][j + self.indsize] - self.ind_all[i][j + self.indsize]) + c_2 * r_2 * \
+                            (self.global_best[j + self.indsize] - self.ind_all[i][j + self.indsize])
+                    self.ind_all[i][j + self.indsize] = self.ind_all[i][j + self.indsize] + self.velocity[i][j + self.indsize]
+                    
+                    num = 0
+                    # 如果当前节点位置大于区域簇，执行下面的语句
+                    while geo.polar_coordinates(remain_len, pol_len, pro_angle, self.ind_all[i][j]) < self.ind_all[i][j + self.indsize]:
+                        
+                        pg_angle = get_pg(self.ind_all[i], j)
+                        pg_pol = get_pg(self.ind_all[i], j + self.indsize)
+                        
+                        # 更新极角
+                        self.velocity[i][j] = c_3 * r_3 * (pg_angle - angle)
+                        self.ind_all[i][j] = angle + self.velocity[i][j]
+                        
+                        # 更新极径
+                        self.velocity[i][j + self.indsize] = c_3 * r_3 * (pg_pol - pol)
+                        self.ind_all[i][j + self.indsize] = pol + self.velocity[i][j + self.indsize]
+                        
+                        if num > 10:
+                            self.ind_all[i][j + self.indsize] %= geo.polar_coordinates(remain_len, pol_len, pro_angle, self.ind_all[i][j])
+                            break
+                        num += 1
+                    
+                    pro_angle += self.ind_all[i][j]
+                    remain_len -= geo.cosine_law(pol_len, self.ind_all[i][j+self.indsize], self.ind_all[i][j])
+                    pol_len = self.ind_all[i][j+self.indsize]
+                    
+            # 变异操作
+            self.Variation()
+                    
+        self.objective_func()
+
+    # 遗传的变异操作
+    def Variation(self):
+        # 对于每一个种群
+        for i in range(self.popsize):
+            P = self.adaptive(i)
+            # 对于每一个种群的粒子
+            if np.random.random() < P:
+                remain_len = self.attack_len
+                pro_angle = self.attack_platform[0]
+                pol_len = self.attack_platform[1]
+                
+                num = randint(0, self.indsize-1)
+                for j in range(self.indsize):
+                    if j == num:
+                        self.ind_all[i][j] = np.random.uniform(-math.pi/2, math.pi/2)
+                        len_limit = geo.polar_coordinates(remain_len, pol_len, pro_angle, self.ind_all[i][j])
+                        self.ind_all[i][j + self.indsize] = np.random.uniform(0, len_limit)
+                    
+                    pro_angle += self.ind_all[i][j]
+                    remain_len -= geo.cosine_law(pol_len, self.ind_all[i][j+self.indsize], self.ind_all[i][j])
+                    pol_len = self.ind_all[i][j+self.indsize]
+                    # 对极角与极径进行变异操作
+                    
+    # 定义自适应变异率
+    def adaptive(self, i):
+        score = self.performance(self.ind_all[i]) - self.penalty_func(self.ind_all[i])
+        if score < self.avg_score:
+            return 0.05
+        else:
+            P = (self.best_score - score) / (self.best_score - self.avg_score) * 0.05
+            return P
+                
+        
                 
     # 画图
     def draw(self):
@@ -580,9 +697,13 @@ if __name__ == '__main__':
     # oacrr_pso.OACRR_PSO()
     # print("OACRR-PSO:", oacrr_pso.global_best)
     
-    oacrr_psao = PSO_Planning(draw_flag = True)
-    oacrr_psao.OACRR_PSAO()
-    print("OACRR-PSAO:", oacrr_psao.global_best)
+    # oacrr_psao = PSO_Planning(draw_flag = True)
+    # oacrr_psao.OACRR_PSAO()
+    # print("OACRR-PSAO:", oacrr_psao.global_best)
+    
+    oacrr_pso_ga = PSO_Planning(draw_flag = True)
+    oacrr_pso_ga.OACRR_PSO_GA()
+    print("OACRR_PSO_GA:", oacrr_pso_ga.global_best)
     
     
     

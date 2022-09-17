@@ -16,6 +16,7 @@ import numpy as np
 import time
 import threading
 import math
+from random import randint
 
 import matplotlib
 matplotlib.use("Qt5Agg")  # 声明使用QT5
