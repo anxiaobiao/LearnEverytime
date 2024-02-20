@@ -1,0 +1,46 @@
+<!-- imu的实现 -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:property name="imu_x" value="0.01" />
+    <xacro:property name="imu_y" value="0.01" />
+    <xacro:property name="imu_z" value="0.01" />
+
+    <xacro:property name="imu_joint_x" value="${car_length / 2 - 0.01}" />
+    <xacro:property name="imu_joint_y" value="0.0" />
+    <xacro:property name="imu_joint_z" value="${imu_z / 2 + car_height / 2}" />
+
+
+    <material name="white">
+        <color rgba="1.0 1.0 1.0 0.5"/>
+    </material>
+
+    <link name="imu">
+        <visual>
+            <geometry>
+                <box size="${imu_x} ${imu_y} ${imu_z}"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+    </link>
+
+    <joint name="imu2base_link" type="fixed">
+        <parent link="base_link"/>
+        <child link="imu"/>
+        <origin xyz="${imu_joint_x} ${imu_joint_y} ${imu_joint_z}"/>
+    </joint>
+
+    <gazebo reference = "imu">
+        <sensor name="imu_sensor" type="imu">
+            <update_rate>100</update_rate>
+            <always_on>true</always_on>
+            <plugin name="imu" filename="libgazebo_ros_imu_sensor.so">
+                <alwaysOn>true</alwaysOn>
+                <bodyName>base_link</bodyName>
+                <topicName>imu</topicName>
+                <serviceName>imu_service</serviceName>
+                <gaussianNoise>0.0</gaussianNoise>
+                <updateRate>100.0</updateRate>
+            </plugin>
+        </sensor>
+        <material>Gazebo/FlatBlack</material>
+    </gazebo>
+</robot>
